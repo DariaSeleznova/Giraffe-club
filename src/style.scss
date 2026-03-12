@@ -1,0 +1,1727 @@
+@use "sass:map";
+
+html {
+    scroll-behavior: smooth;
+}
+
+@font-face {
+    font-family: Bookman;
+    src: url(./assets/fonds/bookman-old-style.ttf);
+}
+
+@mixin flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+@mixin flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin respond($size) {
+    @media (min-width: map.get($breakpoints, $size)) {
+        @content;
+    }
+}
+
+@mixin respond-max($size) {
+    @media (max-width: map.get($breakpoints, $size)) {
+        @content;
+    }
+}
+
+@mixin debug-grid($column, $gap) {
+    background: repeating-linear-gradient(to right,
+            rgba(235, 205, 185, 0.25) 0,
+            rgba(235, 205, 185, 0.25) $column,
+            transparent $column,
+            transparent ($column + $gap));
+}
+
+@mixin label {
+
+    font-weight: 600;
+    display: block;
+    margin-bottom: 20px;
+    font-size: 14px;
+
+    @include respond(xl) {
+        margin-bottom: -70px;
+        font-size: 26px;
+    }
+}
+
+@mixin h2 {
+    font-size: 24px;
+    font-weight: 400;
+    text-align: center;
+
+    @include respond(lg) {
+        font-size: 36px;
+    }
+
+    @include respond(xxl) {
+        font-size: 50px;
+    }
+}
+
+@mixin modals-form {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+}
+
+@mixin modal-formactive {
+    display: flex;
+}
+
+@mixin modal-content {
+    background: white;
+    padding: 10px;
+    border-radius: 28px;
+    width: 270px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    @include respond(md) {
+        width: 350px;
+        padding: 40px;
+        border-radius: 48px;
+    }
+
+    @include respond(lg) {
+        width: 550px;
+    }
+
+    h2 {
+        font-size: 18px;
+        line-height: 1.3;
+        font-weight: 400;
+        text-align: center;
+
+        @include respond(md) {
+            font-size: 26px;
+        }
+
+        @include respond(lg) {
+            font-size: 34px;
+        }
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        input {
+            width: 100%;
+            margin: 20px 40px;
+            border: none;
+            border-bottom: 2px solid $black;
+            outline: none;
+            padding: 8px 0;
+            font-size: 16px;
+            background: transparent;
+
+            @include respond(lg) {
+                font-size: 26px;
+            }
+
+        }
+
+        input:focus {
+            border-bottom: 2px solid $orange;
+        }
+
+        button {
+            width: 70%;
+
+            border: none;
+            border-radius: 10px;
+            background-color: $orange;
+            color: $black;
+            font-size: 16px;
+            padding: 20px 65px;
+
+            @include respond(lg) {
+                width: 50%;
+                font-size: 26px;
+                margin: 60px auto;
+            }
+        }
+    }
+
+    form.hidden {
+        display: none;
+    }
+
+    .form-success {
+        display: none;
+        text-align: center;
+    }
+
+    .form-success.active {
+        display: block;
+
+        @include respond(lg) {
+            padding: 0 80px;
+        }
+
+
+        h3 {
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 1.3;
+            margin-top: 0;
+
+            @include respond(lg) {
+                font-size: 34px;
+            }
+        }
+    }
+}
+
+@mixin modal-input {
+    padding: 10px;
+    font-size: 16px;
+}
+
+@mixin close-form {
+    align-self: flex-end;
+    border: none;
+    background: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+@mixin ol {
+    list-style: none;
+    counter-reset: item;
+    padding: 0;
+    font-size: 34px;
+
+    @include respond-max(xl) {
+        font-size: 30px;
+    }
+
+    @include respond-max(lg) {
+        font-size: 26px;
+    }
+
+    @include respond-max(sm) {
+        font-size: 16px;
+    }
+}
+
+@mixin li {
+    counter-increment: item;
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    align-items: center;
+    gap: 35px;
+
+
+    @include respond-max(lg) {
+        gap: 25px;
+    }
+
+    @include respond-max(sm) {
+        gap: 8px;
+        padding: 10px 0;
+    }
+}
+
+@mixin li-before {
+    content: counter(item, decimal-leading-zero);
+    border: 2px solid $black;
+    border-radius: 50%;
+    width: 66px;
+    height: 66px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include respond-max(lg) {
+        width: 50px;
+        height: 50px;
+    }
+
+    @include respond-max(sm) {
+        width: 38px;
+        height: 38px;
+    }
+
+}
+
+@mixin carousel-layout {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @include respond-max(lg) {
+
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        justify-items: center;
+        row-gap: 20px;
+
+        .carousel_cards {
+            grid-column: 1 / 3;
+        }
+
+        .carousel_left_btn {
+            grid-column: 1;
+        }
+
+        .carousel_right_btn {
+            grid-column: 2;
+        }
+
+    }
+
+}
+
+@mixin card-layout {
+    border-radius: 20px;
+    transition: all .4s ease;
+
+    h3 {
+        font-size: 34px;
+        font-weight: 400;
+        line-height: 1.3;
+
+        @include respond-max(lg) {
+            font-size: 20px;
+        }
+    }
+
+    p {
+        font-size: 20px;
+        font-weight: 400;
+        padding: 0 40px;
+
+        @include respond-max(lg) {
+            font-size: 16px;
+            padding: 0;
+        }
+    }
+}
+
+@mixin buttom-layout {
+    border: none;
+    width: 108px;
+    height: 106px;
+    background: transparent;
+
+    img {
+        width: 100%;
+        height: 100%;
+    }
+
+    @include respond-max(md) {
+        width: 66px;
+        height: 60px;
+    }
+
+    .carousel_left_btn {
+        @include respond-max(md) {
+            margin-left: 60px;
+        }
+    }
+
+    .carousel_right_btn {
+        @include respond-max(md) {
+            margin-right: 60px;
+        }
+    }
+}
+
+
+
+$orange: #DF803E;
+$white: #FFFFFF;
+$black: #000000;
+$lightgray: #C9C9C9;
+$gray: #5C5C5C;
+$breakpoints: (
+    sm: 376px,
+    md: 768px,
+    lg: 1024px,
+    xl: 1440px,
+    xxl: 1920px,
+);
+$container-widths: (
+    sm: 346px,
+    md: 728px,
+    lg: 1024px,
+    xl: 1360px,
+    xxl: 1690px
+);
+$number-size: 66px;
+$number-gap: 20px;
+
+body {
+    margin: 0;
+    font-family: Bookman;
+}
+
+.container {
+    width: 100%;
+    margin: auto;
+
+    @each $breakpoint, $width in $container-widths {
+        @include respond($breakpoint) {
+            max-width: $width;
+        }
+    }
+}
+
+.hero {
+    position: relative;
+    background: $orange;
+    overflow: hidden;
+
+    &:after {
+        content: "";
+        position: absolute;
+
+        bottom: 0;
+        right: 0;
+
+        width: 100%;
+        height: 30%;
+
+        background: white;
+
+        clip-path: polygon(0 100%, 50% 0, 100% 100%);
+        z-index: 1;
+    }
+
+    @include respond(lg) {
+        &::after {
+            top: 0;
+            bottom: auto;
+            right: 0;
+
+            width: 40%;
+            height: 100%;
+
+            clip-path: polygon(100% 0, 0 50%, 100% 100%);
+        }
+    }
+}
+
+.header-hero {
+
+    position: relative;
+    z-index: 100;
+    border-bottom: 2px solid $white;
+}
+
+.navigation {
+    @include flex-row();
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+
+    .burger-menu {
+        display: none;
+        margin: 0;
+
+        h2 {
+            font-size: 32px;
+        }
+    }
+
+    .giraffe {
+        display: none;
+    }
+
+    .close-btn {
+        display: none;
+        margin: 15px;
+    }
+
+    .burger {
+        display: none;
+        font-size: 28px;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    nav {
+        @include flex-row();
+        gap: 10px;
+
+        a {
+            color: $black;
+            text-decoration: none;
+            font-family: Bookman;
+            font-weight: 500;
+            font-size: 20px;
+            padding: 10px 10px 10px 0;
+
+            @include respond(xl) {
+                font-size: 22px;
+            }
+
+            @include respond(xxl) {
+                font-size: 26px;
+            }
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    @include respond-max(lg) {
+        flex-direction: row-reverse;
+        z-index: 20;
+
+        nav {
+            display: none;
+        }
+
+        nav.active .burger-menu {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            border-bottom: 2px solid $orange;
+        }
+
+        nav.active .close-btn {
+            display: block;
+            align-self: flex-end;
+            font-size: 32px;
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+
+        nav.active {
+            @include flex-column();
+            gap: 0;
+            padding: 20px;
+            background: $white;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+
+            .giraffe {
+                display: flex;
+                justify-content: center;
+
+                img {
+                    width: 140px;
+                    height: 195px;
+
+                    @include respond(md) {
+                        display: none;
+                    }
+                }
+            }
+
+            @include respond(md) {
+                gap: 30px;
+            }
+        }
+
+        .burger {
+            display: block;
+        }
+
+    }
+
+    .contact-info {
+        display: none;
+    }
+
+    .contact-info.active {
+        display: block;
+    }
+
+    .contacts {
+        position: relative;
+        display: none;
+
+        @include respond(md) {
+            display: block;
+        }
+    }
+
+    .contact-info {
+        position: absolute;
+        top: 50px;
+        background: white;
+        padding: 10px 20px;
+        border: 1px solid #ccc;
+    }
+
+    .contact-btn {
+        border: none;
+        background: transparent;
+    }
+
+    .contacts img {
+        width: 40px;
+        height: 40px;
+        margin: 0 12px;
+        transition: 0.3s ease;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+}
+
+.hero_section {
+    @include flex-column();
+    align-items: center;
+    position: relative;
+    z-index: 10;
+
+
+    @include respond(lg) {
+        @include flex-row();
+        justify-content: space-between;
+        align-items: flex-start;
+        position: relative;
+        z-index: 2;
+        margin: 90px auto;
+    }
+
+
+    .hero_content {
+        display: flex;
+        width: 90%;
+        flex-direction: column;
+        align-items: center;
+
+        @include respond(md) {
+            align-items: flex-start;
+        }
+
+        @include respond(lg) {
+            width: 50%;
+
+        }
+
+        h1 {
+            font-size: 52px;
+            margin: 20px 0;
+
+            @include respond(md) {
+                font-size: 60px;
+            }
+
+            @include respond(lg) {
+                font-size: 65px;
+            }
+
+            @include respond(xl) {
+                font-size: 75px;
+            }
+
+            @include respond(xxl) {
+                font-size: 90px;
+            }
+        }
+
+        p {
+            font-size: 30px;
+            line-height: 1.1;
+            font-weight: 500;
+
+            @include respond(md) {
+                font-size: 35px;
+            }
+
+            @include respond(lg) {
+                font-size: 40px;
+            }
+
+            @include respond(xl) {
+                font-size: 45px;
+                line-height: 1.2;
+            }
+
+            @include respond(xxl) {
+                font-size: 52px;
+                line-height: 1.3;
+            }
+        }
+
+        .hero_btn {
+            border: none;
+            border-radius: 6px;
+            background-color: $white;
+            color: $black;
+            font-family: Bookman;
+            font-weight: 400;
+            font-size: 14px;
+            padding: 10px 16px;
+            transition: 0.3s ease;
+
+            @include respond(lg) {
+                border-radius: 10px;
+                font-size: 20px;
+                width: 58%;
+                padding: 18px 25px;
+            }
+
+            @include respond(xxl) {
+                font-size: 26px;
+                width: 48%;
+                padding: 20px 42px;
+            }
+
+            &:hover {
+                border: 1px solid $black;
+                transform: scale(1.1);
+            }
+        }
+
+        .modal-form {
+            @include modals-form();
+        }
+
+        .modal-form.active {
+            @include modal-formactive();
+        }
+
+        .modal-content {
+            @include modal-content();
+        }
+
+        .modal-content input {
+            @include modal-input();
+        }
+
+        .close-form {
+            @include close-form();
+        }
+    }
+
+    .hero_image {
+        width: 140px;
+        height: 195px;
+        margin: 20px auto;
+
+        @include respond(md) {
+            width: 266px;
+            height: 371px;
+        }
+
+        @include respond(lg) {
+            width: 359px;
+            height: 506px;
+        }
+
+
+        @include respond(xxl) {
+            width: 539px;
+            height: 761px;
+        }
+
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+}
+
+.about {
+    margin: 110px auto;
+    position: relative;
+
+    .about-label {
+        @include label();
+        color: $orange;
+
+        @include respond-max(md) {
+            padding-left: 20px;
+        }
+    }
+
+    .content-about {
+        @include flex-column();
+        margin: 0 50px;
+        align-items: center;
+
+        h2 {
+            @include h2();
+        }
+
+        .cards-advantages {
+
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+
+            @include respond(lg) {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 40px;
+            }
+
+            @include respond(xxl) {
+                column-gap: 50px;
+                row-gap: 40px;
+            }
+
+
+            .card {
+                @include flex-column();
+                align-items: center;
+                justify-content: center;
+                padding: 13px 0;
+                width: 150px;
+                height: 161px;
+                border: 2px solid $black;
+                border-radius: 10px;
+
+                img {
+                    width: 66px;
+                    height: 66px;
+                }
+
+                h3 {
+                    text-align: center;
+                    font-size: 16px;
+                    font-weight: 400;
+                }
+
+                @include respond(md) {
+                    width: 220px;
+                    height: 210px;
+                    padding: 20px;
+                    font-size: 20px;
+
+                    img {
+                        width: 85px;
+                        height: 85px;
+                    }
+
+                    h3 {
+                        font-size: 22px;
+                    }
+                }
+
+                @include respond(xl) {
+                    width: 300px;
+                    height: 320px;
+                    padding: 15px;
+
+                    img {
+                        width: 140px;
+                        height: 140px;
+                    }
+
+                    h3 {
+                        font-size: 30px;
+                    }
+                }
+
+                @include respond(xxl) {
+                    padding: 50px 10px;
+                    height: 408px;
+                    width: 408px;
+
+                    border-radius: 20px;
+
+                    img {
+                        width: 206px;
+                        height: 206px;
+                    }
+
+                    h3 {
+                        padding: 10px;
+                        font-size: 36px;
+                        font-weight: 600;
+                        line-height: 1.3;
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+.directions {
+    background-color: $orange;
+    position: relative;
+    padding: 25px 0;
+    overflow: hidden;
+
+
+
+    .background-giraffe {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: absolute;
+        bottom: 0;
+        pointer-events: none;
+        height: 85%;
+
+
+        @include respond-max(lg) {
+            height: auto;
+        }
+
+        .left-giraffe,
+        .right-giraffe {
+            width: 160px;
+            height: 226px;
+
+            @include respond(lg) {
+                width: 300px;
+                height: auto;
+            }
+
+            @include respond(xl) {
+                width: 418px;
+                height: 590px;
+            }
+
+
+        }
+
+        .left-giraffe {
+            @include respond-max(md) {
+                transform: translateY(60%);
+            }
+        }
+
+        .right-giraffe {
+            @include respond-max(md) {
+                transform: translateY(40%);
+            }
+        }
+    }
+
+    .directions-container {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 20px;
+        position: relative;
+        width: 100%;
+
+        @include respond-max(sm) {
+            padding: 20px;
+        }
+
+        .direction-label {
+            @include label();
+            grid-column: 1/4;
+            color: $white;
+            margin: 40px 0;
+
+            @include respond-max(lg) {
+                grid-column: 1/3;
+            }
+
+            @include respond-max(md) {
+                grid-column: 1/4;
+                margin: 0;
+            }
+
+            @include respond-max(sm) {
+                grid-column: 1/7;
+            }
+        }
+
+        .content-directions {
+            grid-column: 4/10;
+            @include flex-column();
+            align-items: center;
+
+            @include respond-max(lg) {
+                grid-column: 3/11
+            }
+
+            @include respond-max(md) {
+                grid-column: 1/12;
+            }
+
+            h2 {
+                @include h2();
+            }
+
+            .directions-list {
+                @include ol();
+                border-top: 2px solid $black;
+
+                .mobile-break {
+                    display: none;
+                }
+
+                @include respond-max(md) {
+                    .mobile-break {
+                        display: block;
+                    }
+                }
+
+                li {
+                    @include li();
+                    padding: 15px 0;
+                    border-bottom: 2px solid $black;
+                }
+
+                li::before {
+                    @include li-before();
+                }
+            }
+
+            .directions_btn {
+                background: transparent;
+                border: 2px solid $black;
+                border-radius: 10px;
+                font-size: 26px;
+                padding: 20px 40px;
+                margin: 60px auto;
+                transition: 0.3s ease;
+
+                @include respond-max(md) {
+                    font-size: 20px;
+                    padding: 15px 30px;
+                }
+
+                @include respond-max(sm) {
+                    font-size: 14px;
+                    padding: 10px 20px;
+                    margin-top: 24px;
+                    border-radius: 5px;
+                }
+
+                &:hover {
+                    background-color: $white;
+
+                }
+
+
+            }
+
+            .modal-form {
+                @include modals-form();
+            }
+
+            .modal-form.active {
+                @include modal-formactive();
+            }
+
+            .modal-content {
+                @include modal-content();
+            }
+
+            .modal-content input {
+                @include modal-input();
+            }
+
+            .close-form {
+                @include close-form();
+            }
+        }
+    }
+}
+
+.training {
+    display: flex;
+    padding: 100px 0;
+
+    @include respond-max(lg) {
+        padding: 30px;
+    }
+
+    @include respond-max(md) {
+        padding: 0;
+    }
+
+    @include respond-max(sm) {
+        padding: 0 20px;
+    }
+
+    .training-label {
+        @include label();
+        margin: 0;
+    }
+
+    .training-content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        @include respond-max(xl) {
+            align-items: center;
+        }
+
+        @include respond-max(lg) {
+            justify-content: center;
+            padding: 20px;
+        }
+
+        @include respond-max(md) {
+            padding: 0;
+            justify-content: flex-start;
+        }
+
+        .training_language {
+
+            h2 {
+                @include h2();
+            }
+
+            ol {
+                @include ol();
+
+                li {
+                    @include li();
+                    padding: 20px 0;
+                }
+
+                li::before {
+                    @include li-before();
+                }
+            }
+        }
+    }
+
+    .training_image {
+        width: 956px;
+        height: 505px;
+
+        @include respond-max(xl) {
+            width: 717px;
+            height: 379px;
+        }
+
+        @include respond-max(lg) {
+            order: 1;
+            margin: 30px 0;
+        }
+
+        @include respond-max(sm) {
+            width: 320px;
+            height: 243px;
+            margin: 40px 20px;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .training_format {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+
+        @include respond-max(md) {
+            align-items: baseline;
+        }
+
+        h2 {
+            @include h2();
+        }
+
+        .discription_format {
+            display: flex;
+            justify-content: space-between;
+
+            @include respond-max(md) {
+                flex-direction: column;
+            }
+
+            .format_card {
+                width: 31%;
+
+                @include respond-max(md) {
+                    width: 100%;
+                }
+
+                .card-title {
+                    @include flex-row();
+                    align-items: center;
+
+                    .number {
+                        width: $number-size;
+                        height: $number-size;
+                        border: 2px solid $black;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin-right: $number-gap;
+
+                        @include respond-max(md) {
+                            width: calc($number-size/2);
+                            height: calc($number-size/2);
+                        }
+
+                        h3 {
+                            font-size: 34px;
+                            font-weight: 400;
+
+                            @include respond-max(md) {
+                                font-size: 18px;
+                            }
+                        }
+                    }
+
+                    h4 {
+                        font-size: 34px;
+                        font-weight: 400;
+
+                        @include respond-max(md) {
+                            font-size: 20px;
+                        }
+                    }
+                }
+
+                p {
+                    font-size: 28px;
+                    font-size: 400;
+                    padding-left: $number-gap+$number-size+10px;
+
+                    @include respond-max(xl) {
+                        font-size: 22px;
+                        padding-left: $number-gap+$number-size;
+                    }
+
+                    @include respond-max(lg) {
+                        padding: 0px 20px;
+                        margin: 0;
+                    }
+
+                    @include respond-max(md) {
+                        padding-left: $number-size;
+                        font-size: 16px;
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+.trip {
+    margin: 108px auto;
+
+    @include respond-max(lg) {
+        margin: 10px auto;
+        padding: 30px;
+    }
+
+    @include respond-max(md) {
+        padding: 0;
+    }
+
+    @include respond-max(sm) {
+        padding: 0 20px;
+    }
+
+    .trip-label {
+        @include label();
+    }
+
+    .trip_content {
+
+        h2 {
+            @include h2();
+        }
+
+        .trip_discription {
+            margin-top: 45px;
+
+            p {
+                font-size: 34px;
+                line-height: 1.3;
+
+                @include respond-max(xl) {
+                    font-size: 24px;
+                }
+
+                @include respond-max(lg) {
+                    font-size: 18px;
+                }
+
+                @include respond-max(md) {
+                    font-size: 16px;
+                    line-height: normal;
+                    margin: 0;
+                }
+            }
+        }
+
+    }
+
+    .gallery {
+        margin: 45px auto 100px;
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        grid-auto-rows: 120px;
+        gap: 20px;
+        grid-template-areas:
+            "g1 g1 g1 g2 g2 g2 g2 g2 g3 g3 g3 g3"
+            "g1 g1 g1 g2 g2 g2 g2 g2 g3 g3 g3 g3"
+            "g1 g1 g1 g2 g2 g2 g2 g2 g3 g3 g3 g3"
+            "g1 g1 g1 g5 g5 g5 g5 g6 g6 g6 g6 g6"
+            "g4 g4 g4 g5 g5 g5 g5 g6 g6 g6 g6 g6"
+            "g4 g4 g4 g5 g5 g5 g5 g6 g6 g6 g6 g6"
+            "g4 g4 g4 g5 g5 g5 g5 g7 g7 g8 g8 g8"
+            "g4 g4 g4 g5 g5 g5 g5 g7 g7 g8 g8 g8";
+
+        @include respond-max(lg) {
+            margin: 24px auto 50px;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 80px;
+            gap: 10px;
+            grid-template-areas:
+                "g4 g4 g1 g1"
+                "g4 g4 g1 g1"
+                "g4 g4 g1 g1"
+                "g6 g6 g6 g6"
+                "g6 g6 g6 g6"
+                "g6 g6 g6 g6"
+                "g7 g7 g7 g7"
+                "g7 g7 g7 g7"
+                "g5 g5 g8 g8"
+                "g5 g5 g8 g8"
+                "g5 g5 g8 g8"
+                "g5 g5 g3 g3"
+                "g2 g2 g3 g3"
+                "g2 g2 g3 g3";
+        }
+
+        @include respond-max(sm) {
+            grid-auto-rows: 40px;
+        }
+
+
+        div {
+            overflow: hidden;
+            border-radius: 20px;
+            transition: transform .4s ease;
+
+            &:hover {
+                transform: scale(1.05);
+            }
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+    }
+
+
+
+    .g1 {
+        grid-area: g1;
+    }
+
+    .g2 {
+        grid-area: g2;
+        margin-right: 20px;
+
+        @include respond-max(lg) {
+            margin-right: 0;
+        }
+    }
+
+    .g3 {
+        grid-area: g3;
+        transform: translateX(-20px);
+        margin-right: -10px;
+
+        @include respond-max(lg) {
+            margin-right: 0;
+            transform: translateX(0);
+        }
+    }
+
+    .g4 {
+        grid-area: g4;
+    }
+
+    .g5 {
+        grid-area: g5;
+        margin-right: 20px;
+
+        @include respond-max(lg) {
+            margin-right: 0;
+        }
+    }
+
+    .g6 {
+        grid-area: g6;
+        transform: translateX(-20px);
+        margin-right: -10px;
+
+        @include respond-max(lg) {
+            margin-right: none;
+            transform: translateX(0);
+        }
+    }
+
+    .g7 {
+        grid-area: g7;
+        margin-left: -20px;
+        margin-right: -20px;
+
+        @include respond-max(lg) {
+            margin-right: 0;
+            margin-left: 0;
+        }
+
+    }
+
+    .g8 {
+        grid-area: g8;
+        transform: translateX(-20px);
+        margin-left: 40px;
+        margin-right: -10px;
+
+        @include respond-max(lg) {
+            margin-left: 0;
+            margin-right: 0;
+            transform: translateX(0);
+        }
+    }
+
+    .gallery div {
+        border-radius: 10px;
+    }
+
+}
+
+.team {
+    background-color: $orange;
+    padding: 100px 0;
+    overflow-x: hidden;
+
+
+    @include respond-max(lg) {
+        padding: 0;
+    }
+
+    .team-label {
+        @include label();
+    }
+
+    .team_content {
+        h2 {
+            @include h2();
+
+            @include respond-max(sm) {
+                padding: 0 40px;
+            }
+        }
+
+        .carousel {
+            @include carousel-layout();
+
+            .carousel_left_btn,
+            .carousel_right_btn {
+                @include buttom-layout();
+            }
+
+            .carousel_cards {
+                margin-top: 40px;
+                width: 83%;
+                display: flex;
+                justify-content: space-between;
+                gap: 20px;
+                transition: transform .5s ease;
+                text-align: center;
+                align-items: flex-start;
+
+                @include respond-max(xl) {
+                    gap: 50px;
+                }
+
+                @include respond-max(lg) {
+                    width: 100%;
+                    order: -1;
+                    justify-content: center;
+                    margin-bottom: 50px;
+                    overflow: hidden;
+                    padding: 0 40px;
+                    gap: 20px;
+                }
+
+                @include respond-max(sm) {
+                    padding: 0;
+                    gap: 0;
+                }
+
+                .card {
+                    @include card-layout();
+                    width: 400px;
+                    background: white;
+
+                    @include respond-max(xl) {
+                        width: 320px;
+                    }
+
+                    @include respond-max(lg) {
+                        width: 240px;
+                        transform: scale(.85);
+                        transition: all .4s ease;
+                        flex-shrink: 0;
+                    }
+
+                    @include respond-max(sm) {
+                        width: 200px;
+                    }
+
+                    img {
+                        width: 100%;
+                        border-radius: 20px;
+
+                        @include respond-max(sm) {
+                            width: 94px;
+                            height: 110px;
+                            border-radius: 0;
+                            margin-top: 17px;
+                        }
+                    }
+                }
+
+                .card.active {
+                    transform: scale(1.1);
+
+                    @include respond-max(lg) {
+                        width: 260px;
+                        opacity: 1;
+                        transform: scale(1);
+                    }
+
+                    @include respond-max(sm) {
+                        width: 210px;
+                    }
+                }
+
+                .card .directions_team {
+                    display: none;
+                }
+
+                .card.active .directions_team {
+                    display: block;
+
+                }
+            }
+
+        }
+    }
+}
+
+.reviews {
+    padding: 100px 0;
+
+    @include respond-max(lg) {
+        padding: 40px 0;
+    }
+
+    .reviews-label {
+        @include label();
+    }
+
+    .reviews_catalog {
+        h2 {
+            @include h2();
+        }
+
+        .carousel {
+            @include carousel-layout();
+
+            .carousel_left_btn,
+            .carousel_right_btn {
+                @include buttom-layout();
+            }
+
+            .carousel_cards {
+                @include flex-row();
+                justify-content: space-around;
+                width: 70%;
+
+
+                @include respond-max(lg) {
+                    width: 90%;
+                    padding: 20px;
+                    order: -1;
+                }
+
+                .card {
+                    @include card-layout();
+                    background-color: $orange;
+                    display: none;
+                }
+
+                .card.active {
+                    display: flex;
+                    flex-direction: column;
+                    padding: 48px 80px;
+
+                    @include respond-max(lg) {
+                        padding: 40px;
+                    }
+
+                    @include respond-max(sm) {
+                        padding: 20px;
+                        width: 320px;
+
+                        .review_img {
+                            width: 50px;
+                            height: 71px;
+
+                            img {
+                                width: 100%;
+                                height: 100%;
+                            }
+                        }
+                    }
+
+                    .review_title {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        border-bottom: 2px solid $white;
+
+                        .client {
+                            @include respond-max(sm) {
+                                width: 60%;
+                            }
+                        }
+
+                    }
+
+                    h3 {
+                        margin: 0;
+                    }
+
+                    p {
+                        padding: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+footer {
+    background-color: $orange;
+    padding-top: 60px 0;
+
+    @include respond-max(lg) {
+        padding-top: 40px 0;
+    }
+
+    .container {
+        @include flex-row();
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        padding-bottom: 30px;
+
+        @include respond-max(lg) {
+            align-items: flex-start;
+            padding: 20px;
+        }
+
+        p {
+            font-size: 18px;
+
+            @include respond-max(lg) {
+                font-size: 14px;
+            }
+        }
+
+        .logo {
+            font-size: 41px;
+
+            @include respond-max(lg) {
+                font-size: 20px;
+                order: 1;
+
+                h4 {
+                    margin-top: 10px;
+                }
+            }
+
+        }
+
+        .contact-info {
+            @include flex-row();
+            width: 55%;
+            justify-content: space-between;
+
+            @include respond-max(lg) {
+                @include flex-column();
+                order: 3;
+            }
+        }
+
+        .social {
+            @include flex-column();
+            align-items: center;
+            order: 2;
+
+            @include respond-max(lg) {
+                width: 50%;
+            }
+        }
+    }
+}
+
+
+//-----utilities-------
+body.debug-grid::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+
+    width: 346px;
+    @include debug-grid(70px, 21px);
+
+    @include respond(md) {
+        width: 728px;
+        @include debug-grid(71px, 20px);
+    }
+
+    @include respond(lg) {
+        width: 944px;
+        @include debug-grid(80px, 20px);
+    }
+
+    @include respond(xl) {
+        width: 1360px;
+        @include debug-grid(104px, 21px);
+    }
+
+    @include respond(xxl) {
+        width: 1690px;
+        @include debug-grid(122px, 20px);
+    }
+}

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giraffe Club</title>
+    <script src="./index.js"></script>
+</head>
+
+<body class="debug-grid">
+    <section class="hero">
+        <header class="header-hero">
+            <div class="navigation container">
+                <button class="burger" id="burger">
+                    <img src="./assets/image/burger-menu.png" alt="">
+                </button>
+
+                <nav>
+                    <div class="burger-menu container">
+                        <h2>Giraffe Club</h2>
+                        <button class="close-btn" id="closeBtn"><img src="./assets/image/close-btn.png" alt=""></button>
+
+                    </div>
+                    <a href="#about">Про нас</a>
+                    <a href="#directions">Напрямки роботи</a>
+                    <a href="#training">Навчання</a>
+                    <a href="#trip">Наші подорожі</a>
+                    <a href="#team">Наша команда</a>
+                    <a href="#review">Відгуки</a>
+                    <div class="giraffe">
+                        <img src="./assets/image/giraffe.png" alt="">
+                    </div>
+
+                </nav>
+                <div class="contacts">
+                    <button class="contact-btn"> <img src="./assets/image/telephone.svg" alt="telephone"></button>
+                    <div class="contact-info">
+                        <h4>Номер телефону:</h4>
+                        <p>+38 050 843 91 68</p>
+                    </div>
+
+                    <button class="contact-btn"> <img src="./assets/image/location.svg" alt="location"></button>
+                    <div class="contact-info">
+                        <h4>Адреса:</h4>
+                        <p>м. Кропивницький, вул. Соборна, 1а</p>
+                    </div>
+                    <button class="contact-btn"> <img src="./assets/image/mail.svg" alt="mail"></button>
+                    <div class="contact-info">
+                        <h4>Email:</h4>
+                        <p>info@giraffe.in.ua</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="hero_section container">
+            <div class="hero_content">
+                <h1>Giraffe Club</h1>
+                <p>Офіційний сертифікований центр підготовки до міжнародних екзаменів Cambrige</p>
+                <button class="hero_btn" id="openForm">Отримати консультацію</button>
+                <div class="modal-form" id="modalForm">
+                    <div class="modal-content">
+
+                        <button class="close-form" id="closeForm">✕</button>
+
+                        <form id="contactForm">
+                            <h2>Отримати консультацію</h2>
+                            <input type="text" placeholder="Ім’я" required>
+                            <input type="tel" placeholder="Номер тел." required>
+
+                            <button type="submit">Надіслати</button>
+                        </form>
+                        <div class="form-success" id="formSuccess">
+                            <h3>Дякуємо!</h3>
+                            <h3>Ваш запит надіслано. Чекайте дзвінка</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero_image">
+                <img src="./assets/image/giraffe.png" alt="">
+            </div>
+        </div>
+    </section>
+    <section id="about" class="about">
+        <div class="container">
+            <span class="about-label">Про нас</span>
+            <div class="content-about">
+                <h2>Мовних шкіл багато - лідер один!</h2>
+                <div class="cards-advantages">
+                    <div class="card">
+                        <img src="./assets/image/section_about/calendar.png" alt="calendar">
+                        <h3>6 років успішної роботи</h3>
+                    </div>
+                    <div class="card">
+                        <img src="./assets/image/section_about/open-book.png" alt="open-book">
+                        <h3>Сучасні програми й навчальні матеріали</h3>
+                    </div>
+                    <div class="card">
+                        <img src="./assets/image/section_about/female.png" alt="female">
+                        <h3>Професійні викладачи</h3>
+                    </div>
+                    <div class="card">
+                        <img src="./assets/image/section_about/success.png" alt="success">
+                        <h3>Переможець «Народний Бренд» (2018, 2019, 2020)</h3>
+                    </div>
+                    <div class="card">
+                        <img src="./assets/image/section_about/handshake.png" alt="handshake">
+                        <h3>Топ партнер Cambridge Assessment English</h3>
+                    </div>
+                    <div class="card">
+                        <img src="./assets/image/section_about/graduating-student.png" alt="graduating-student">
+                        <h3>Сотні наших випускників з високим рівнем</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+    <section id="directions" class="directions">
+        <div class="container">
+            <div class="background-giraffe container">
+                <div><img class="left-giraffe" src="./assets/image/giraffe.png" alt="giraffe"></div>
+                <div><img class="right-giraffe" src="./assets/image/giraffe.png" alt="giraffe"></div>
+
+            </div>
+            <div class="directions-container">
+                <span class="direction-label">Напрямки роботи</span>
+                <div class="content-directions ">
+                    <h2>Що ти можеш у нас знайти?</h2>
+                    <ol class="directions-list">
+                        <li>Англійська для дітей від 1 року</li>
+                        <li>Англійська для дорослих</li>
+                        <li>Americanschool для школярів <br class="mobile-break">( 1 - 11 клас )</li>
+                        <li>Підготовка до ЗНО</li>
+                        <li>Підготовка до міжнародних екзаменів YLE, KET, PET, FCE, IELTS</li>
+                        <li>Німецька для дорослих та дітей, віком від 3 років</li>
+                        <li>Підготовка дітей до школи</li>
+                        <li>Літній табір</li>
+                    </ol>
+                    <button class="directions_btn" id="directions_btn">Залишити заявку</button>
+                    <div class="modal-form" id="modalDirections">
+                        <div class="modal-content">
+
+                            <button class="close-form" id="closeDirectionsForm">✕</button>
+
+                            <form id="directionsForm">
+                                <h2>Залишити заявку</h2>
+                                <input type="text" placeholder="Ім’я" required>
+                                <input type="tel" placeholder="Номер тел." required>
+
+                                <button type="submit">Надіслати</button>
+                            </form>
+                            <div class="form-success" id="directionsSuccess">
+                                <h3>Дякуємо!</h3>
+                                <h3>Ваш запит надіслано. Чекайте дзвінка</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="training" class="training">
+        <div class="container">
+            <span class="training-label">Навчання</span>
+            <div class="training-content">
+                <div class="training_language">
+                    <h2>Вивчення іноземної мови</h2>
+                    <ol class="training-list">
+                        <li>У групах</li>
+                        <li>У міні-групах</li>
+                        <li>Індивідуально</li>
+                    </ol>
+                </div>
+                <div class="training_image">
+                    <img src="./assets/image/training_image/training.png" alt="training">
+                </div>
+                <div class="training_format">
+                    <h2>Формати курсів:</h2>
+                    <div class="discription_format">
+                        <div class="format_card">
+                            <div class="card-title">
+                                <div class="number">
+                                    <h3>01</h3>
+                                </div>
+                                <h4>Стандартний</h4>
+                            </div>
+                            <p>Заняття 2 рази на тиждень тривалістю від 30 до 60 хв.<br> (в
+                                залежності
+                                від віку).
+                            </p>
+                        </div>
+                        <div class="format_card">
+                            <div class="card-title">
+                                <div class="number">
+                                    <h3>02</h3>
+                                </div>
+                                <h4>Поглиблений</h4>
+                            </div>
+                            <p>Заняття 3 рази на тиждень по <br> 1 год. 20 хв.<br> З Кембриджським
+                                іспитом на новий рівень в кінці навчального року.</p>
+                        </div>
+                        <div class="format_card">
+                            <div class="card-title">
+                                <div class="number">
+                                    <h3>03</h3>
+                                </div>
+                                <h4>Онлайн-курс</h4>
+                            </div>
+                            <p>Можна обрати як стандартний,<br> так і поглиблений формат та вивчати
+                                онлайн</p>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <section id="trip" class="trip">
+        <div class="container">
+            <span class="trip-label">Наші подорожі</span>
+            <div class="trip_content">
+                <h2>Ми подорожуємо світом</h2>
+                <div class="trip_discription">
+                    <p>Лондон, Греція, Болгарія, Польша, різні міста України. </p>
+                    <p>Гарною традицією «GiraffeClub» стали освітні подорожі студентів в різні країни. Окрім вивчення
+                        англійської й покращення практичних навичок мови у спеціалізованих мовних центрах світу,
+                        програми поїздок передбачають щоденні розваги й екскурсії.</p>
+                </div>
+            </div>
+            <div class="gallery">
+                <div class="g1"><img src="./assets/image/trip/1.png" alt=""></div>
+                <div class="g2"><img src="./assets/image/trip/2.png" alt=""></div>
+                <div class="g3"><img src="./assets/image/trip/3.png" alt=""></div>
+                <div class="g4"><img src="./assets/image/trip/4.png" alt=""></div>
+                <div class="g5"><img src="./assets/image/trip/5.png" alt=""></div>
+                <div class="g6"><img src="./assets/image/trip/6.png" alt=""></div>
+                <div class="g7"><img src="./assets/image/trip/7_mobile.png" alt=""></div>
+                <div class="g8"><img src="./assets/image/trip/8.png" alt=""></div>
+            </div>
+        </div>
+    </section>
+    <section id="team" class="team">
+        <div class="container">
+            <span class="team-label">
+                Наша команда
+            </span>
+            <div class="team_content">
+                <h2>Найкраща команда - найкращі результати</h2>
+                <div class="carousel">
+                    <button class="carousel_left_btn"><img src="./assets/image/team/button_left.png" alt=""></button>
+                    <div class="carousel_cards">
+                        <div class="card">
+                            <img src="./assets/image/team/valeriia.png" alt="">
+                            <h3>Валерія Звіранська</h3>
+                            <p>Адміністратор</p>
+                            <p class="directions_team">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab.</p>
+                            <p class="directions_team">Lorem ipsum dolor sit.</p>
+                        </div>
+                        <div class="card active">
+                            <img src="./assets/image/team/olha.png" alt="">
+                            <h3>Ольга Мануйлова</h3>
+                            <p>Засновниця школи.</p>
+                            <p class="directions_team">Має вищу педагогічну освіту. Її профіль: германські мови.<br>
+                                Перекладач.</p>
+                            <p class="directions_team">Викладацький стаж: 22 роки</p>
+                        </div>
+                        <div class="card">
+                            <img src="./assets/image/team/nataliia.png" alt="">
+                            <h3>Наталія Шмалько</h3>
+                            <p>Адміністратор</p>
+                            <p class="directions_team">Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                                Aperiam.</p>
+                            <p class="directions_team">Lorem ipsum dolor sit.</p>
+                        </div>
+                    </div>
+                    <button class="carousel_right_btn"><img src="./assets/image/team/button_right.png" alt=""></button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="review" class="reviews">
+        <div class="container">
+            <span class="reviews-label">
+                Відгуки
+            </span>
+            <div class="reviews_catalog">
+                <h2>Що кажуть про нас</h2>
+                <div class="carousel">
+                    <button class="carousel_left_btn">
+                        <img src="./assets/image/reviews/button_left.png" alt="">
+                    </button>
+                    <div class="carousel_cards">
+                        <div class="card">
+                            <div class="review_title">
+                                <div class="client">
+                                    <h3>Ольга Глущенко</h3>
+                                    <p>мама в декреті</p>
+                                </div>
+                                <div class="review_img">
+                                    <img src="./assets/image/reviews/Background 1.png" alt="">
+                                </div>
+                            </div>
+                            <div class="review">
+                                <p>Зацікавила можливість підвищити свій рівень англійської. Робота в групі дає
+                                    можливість більше практикувати розмовні навики, і в той же час, жоден учасник не
+                                    залишається без уваги. Після цього опиту, довірила свою дитину - так як впевнена у
+                                    результаті. Мій відгук постійно повторюється всім знайомим та їх дітям.</p>
+                            </div>
+                        </div>
+                        <div class="card active">
+                            <div class="review_title">
+                                <div class="client">
+                                    <h3>Ольга Березовська</h3>
+                                    <p>приватний нотаріус м.Кропивницький</p>
+                                </div>
+                                <div class="review_img">
+                                    <img src="./assets/image/reviews/Background 1.png" alt="">
+                                </div>
+                            </div>
+                            <div class="review">
+                                <p>Високий рівень викладання – викладачі прекрасні, професіонали своєї справи.
+                                    Звернулися до Ольги до Жирафа Клаба за рекомендацією. Хочу особливо відзначити
+                                    організованість, дисципліну, чіткість, гарний та зручний дизайн офісу. Враження лише
+                                    позитивні, чудові, результат навчання – міжнародний сертифікат у дочки. Рекомендую.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="review_title">
+                                <div class="client">
+                                    <h3>Олена Горкуша</h3>
+                                    <p>бухгалтер, м.Кропивницький</p>
+                                </div>
+                                <div class="review_img">
+                                    <img src="./assets/image/reviews/Background 1.png" alt="">
+                                </div>
+                            </div>
+                            <div class="review">
+                                <p>Шукала школу іноземних мов для доньки, вчилася в Жираф Клаб з 6 по 11 клас. Мене
+                                    вразила відкритість та комунікативність вчителів, які шукають підхід до дитини, а
+                                    також дуже високий рівень підготовки вчителів. Чудова підготовка також до
+                                    міжнародних екзаменів. Даша пройшла підготовку до IELTS!!! Рекомендую!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel_right_btn">
+                        <img src="./assets/image/reviews/button_right.png" alt="">
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <div class="logo">
+                <h4>Giraffe club</h4>
+            </div>
+            <div class="contact-info">
+                <div class="contact">
+                    <p>Номер телефону:</p>
+                    <p>+38 050 843 91 68</p>
+                </div>
+                <div class="contact">
+                    <p>Email:</p>
+                    <p>info@giraffe.in.ua</p>
+                </div>
+                <div class="contact">
+                    <p>Адреса:</p>
+                    <p>м. Кропивницький, вул. Соборна, 1а</p>
+                </div>
+            </div>
+            <div class="social">
+                <p>Соціальні мережі:</p>
+                <div class="social-img">
+                    <a href="#"><img src="./assets/image/footer/facebook.png" alt=""></a>
+                    <a href="#"><img src="./assets/image/footer/Instagram.png" alt=""></a>
+
+                </div>
+            </div>
+        </div>
+
+
+    </footer>
+</body>
+
+</html>
